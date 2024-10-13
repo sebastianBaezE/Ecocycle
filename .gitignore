@@ -3,3 +3,4 @@ ecoenv/
 *.pyc
 db/
 .python-version
+staticfiles/
