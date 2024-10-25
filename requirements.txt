@@ -6,7 +6,6 @@ certifi==2022.9.24
 charset-normalizer==2.1.1
 click==8.1.7
 dj-database-url==2.2.0
-Django==4.0
 Django==5.1.2
 django-bootstrap4==22.3
 django-filter==23.1
