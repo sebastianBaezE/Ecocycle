@@ -31,6 +31,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['ecocycle-vs37.onrender.com', '127.0.0.1', 'localhost']
 
+from datetime import timedelta
+
 
 # Application definition
 
@@ -44,6 +46,8 @@ INSTALLED_APPS = [
     'eco',
     'bootstrap4',
     'widget_tweaks',
+    'rest_framework',
+    'rest_framework_simplejwt'
 ]
 
 MIDDLEWARE = [
@@ -93,6 +97,17 @@ DATABASES = {
     }
 }
 
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ),
+}
+
+SIMPLE_JWT = {
+    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=10),
+    "REFRESH_TOKEN_LIFETIME": timedelta(days=1)
+}
 
 
 # Password validation
