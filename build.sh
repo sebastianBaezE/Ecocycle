@@ -9,4 +9,6 @@ python3 manage.py collectstatic --no-input
 
 python3 manage.py migrate
 
-python manage.py seed_database
+python3 manage.py seed_database
+
+python3 manage.py create_superuser
