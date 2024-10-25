@@ -4,3 +4,6 @@ ecoenv/
 db/
 .python-version
 staticfiles/
+
+entorno/
+*.env

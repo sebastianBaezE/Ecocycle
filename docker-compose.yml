@@ -1,0 +1,25 @@
+version: "3.9"
+services:
+  basededatos:
+    image: postgres:latest
+    environment:
+      POSTGRES_DB: ecocycle2
+      POSTGRES_USER: ecocycle
+      POSTGRES_PASSWORD: ecocycle123
+      TZ: America/Argentina/Buenos_Aires
+
+  appback:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      - PSQL_USER=ecocycle
+      - PSQL_PASSWORD=ecocycle123
+      - PSQL_HOST=basededatos
+      - PSQL_PORT=5432
+      - PSQL_DATABASE=ecocycle2
+      - TZ=America/Argentina/Buenos_Aires
+    ports:
+      - "8000:8000"
+    depends_on:
+      - basededatos

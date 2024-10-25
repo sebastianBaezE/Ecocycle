@@ -13,12 +13,22 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 
 import os
 import dj_database_url
+from dotenv import load_dotenv
 
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+load_dotenv()
+# Variables de entorno
+user = os.environ.get("PSQL_USER")
+password = os.environ.get("PSQL_PASSWORD")
+host = os.environ.get("PSQL_HOST")
+port = os.environ.get("PSQL_PORT")
+database = os.environ.get("PSQL_DATABASE")
+
+DATABASE_CONNECTION_URI = f'postgresql://{user}:{password}@{host}:{port}/{database}'
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
@@ -162,6 +172,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 DATABASES = {
     'default': dj_database_url.config(
-        default='postgres://seba:1325@localhost:5432/ecocycle2'
+        default=DATABASE_CONNECTION_URI
     )
 }
