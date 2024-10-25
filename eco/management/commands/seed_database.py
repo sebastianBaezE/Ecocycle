@@ -5,6 +5,14 @@ class Command(BaseCommand):
     help = 'Seed the database with initial data'
 
     def handle(self, *args, **kwargs):
+        
+        Tiposmateriales.objects.all().delete()
+        Puntos.objects.all().delete()
+        Ordenes.objects.all().delete()
+        Materiales.objects.all().delete()
+
+        self.stdout.write(self.style.WARNING('All tables cleared.'))
+
         # Tiposmateriales
         material1 = Tiposmateriales.objects.create(nombre="Plástico")
         material2 = Tiposmateriales.objects.create(nombre="Vidrio")
