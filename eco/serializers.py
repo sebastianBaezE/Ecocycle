@@ -1,8 +1,13 @@
 from rest_framework import serializers
-from .models import Ordenes,Puntos
+from .models import Ordenes,Puntos, Tiposmateriales
+
+class TiposMaterialesSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Tiposmateriales
+        fields = ['id', 'nombre']  # Incluye los campos que desees mostrar
 
 class OrdenesSerializer(serializers.ModelSerializer):
-    tipo_nombre = serializers.ReadOnlyField(source='tipo.nombre')
+    tipo = TiposMaterialesSerializer(read_only=True)
     class Meta:
         model = Ordenes
         fields = '__all__'

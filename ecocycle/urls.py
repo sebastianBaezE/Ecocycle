@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from eco.views import MaterialesCreate, FormulariosDetail, FormulariosCreate, cerrar_formulario, bonita, OrdenesList, OrdenReservaUpdate, OrdenEntregaUpdate, PuntoMaterialRegistro
+from eco.views import ListarPuntos, MaterialesCreate, FormulariosDetail, FormulariosCreate, cerrar_formulario, bonita, OrdenesList, OrdenReservaUpdate, OrdenEntregaUpdate, PuntoMaterialRegistro
 from django.contrib.auth.views import LoginView, LogoutView
 
 from rest_framework_simplejwt.views import (
@@ -42,6 +42,7 @@ urlpatterns = [
     path('api/ordenes_disponibles/', OrdenesList.as_view(), name='ordenes_list'),
     path('api/reservar_orden/<int:pk>/', OrdenReservaUpdate.as_view(), name='orden_reserva_update'),
     path('api/entregar_orden/<int:pk>/', OrdenEntregaUpdate.as_view(), name='orden_entrega_update'),
+    path('api/get_deposito_by_name/<str:name>/', ListarPuntos.as_view(), name='listar_punto_por_nombre'),
     path('api/registrar_deposito/', PuntoMaterialRegistro.as_view(), name='punto_material_registro'),
 
     # API - JWT Tokens

@@ -5,9 +5,19 @@ from ..models import Puntos,Tiposmateriales
 from ..serializers import PuntosSerializer
 from rest_framework.permissions import IsAuthenticated
 
+class ListarPuntos(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def get (self, request, name):
+        try:
+            instance = Puntos.objects.get(nombre=name)
+            serializer = PuntosSerializer(instance)
+            return Response(serializer.data)
+        except Puntos.DoesNotExist:
+            return Response({'error': 'El punto no existe.'}, status=status.HTTP_404_NOT_FOUND)
+
 class PuntoMaterialRegistro(APIView):
 
-    permission_classes = [IsAuthenticated]
 
     def post(self, request):
 
