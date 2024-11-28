@@ -5,7 +5,7 @@ class Command(BaseCommand):
     help = 'Seed the database with initial data'
 
     def handle(self, *args, **kwargs):
-        
+        # Clear existing data
         Tiposmateriales.objects.all().delete()
         Puntos.objects.all().delete()
         Ordenes.objects.all().delete()
@@ -23,7 +23,7 @@ class Command(BaseCommand):
         material7 = Tiposmateriales.objects.create(nombre="Aluminio")
         material8 = Tiposmateriales.objects.create(nombre="Caucho")
         material9 = Tiposmateriales.objects.create(nombre="Cobre")
-        
+
         # Puntos
         punto1 = Puntos.objects.create(nombre="Punto Norte")
         punto1.materiales_posibles.set([material1, material2, material6])
@@ -42,7 +42,7 @@ class Command(BaseCommand):
 
         punto6 = Puntos.objects.create(nombre="Punto Reciclaje Avanzado")
         punto6.materiales_posibles.set([material7, material1, material8])
-        
+
         # Ordenes
         ordenes = [
             Ordenes(cantidad=10, tipo=material1, reservado=False, entregado=False),
@@ -71,7 +71,6 @@ class Command(BaseCommand):
             Ordenes(cantidad=19, tipo=material4, reservado=True, entregado=False, proveedor=punto2),
             Ordenes(cantidad=2, tipo=material1, reservado=True, entregado=True, proveedor=punto1),
         ]
-        Ordenes.objects.bulk_create(ordenes)
         Ordenes.objects.bulk_create(ordenes)
 
         self.stdout.write(self.style.SUCCESS('Successfully seeded the database.'))
